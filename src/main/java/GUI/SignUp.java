@@ -3,11 +3,11 @@ package GUI;
 import DAO.UserDAO;
 import Entities.User;
 import JDBC.Connection;
+import com.mysql.cj.log.Log;
 import org.hibernate.Session;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class SignUp extends JFrame{
@@ -17,12 +17,47 @@ public class SignUp extends JFrame{
     private JPanel signUpPanel;
     SignUp(){
         setContentPane(signUpPanel);
-        setDefaultLookAndFeelDecorated(true);
         setTitle("Sign up");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(300, 300);
         setLocationRelativeTo(null);
         setVisible(true);
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                new Login();
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,8 +95,10 @@ public class SignUp extends JFrame{
                     dao.add(newUser);
                     JOptionPane.showMessageDialog(new JFrame(), "User signed up!");
                     dispose();
+                    new Login();
                 }
             }
         });
+
     }
 }

@@ -33,16 +33,6 @@
           <font name="Courier New"/>
         </properties>
       </component>
-      <component id="e3525" class="javax.swing.JTextArea" binding="passwordReveal">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="4" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="100" height="20"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font name="Courier New"/>
-        </properties>
-      </component>
       <component id="2cab2" class="javax.swing.JButton" binding="loginButton">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -96,7 +86,7 @@
       </component>
       <component id="a7bb2" class="javax.swing.JCheckBox" binding="showPasswordCheckBox" default-binding="true">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Show Password"/>

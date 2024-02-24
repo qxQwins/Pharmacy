@@ -30,7 +30,7 @@ public class Main {
 //        UserDAO ud = new UserDAO();
 //        ud.add(user);
         //System.out.println(userDAO.fetchById(5));
-        //new Login();
+        new Login();
 //        Company company1 = new Company("zxcPharm", "Igymensky 24");
 //        CompanyDAO cd = new CompanyDAO();
 //        cd.add(company1);
@@ -41,7 +41,6 @@ public class Main {
 //        pd.add(product1);
 //        pd.add(product2);
 //        pd.add(product3);
-//        Connection.shutdown();
     }
     public static boolean login(String login, String password){
         Session session = Connection.getSessionFactory().openSession();
