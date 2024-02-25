@@ -25,23 +25,32 @@ public class ProductsGUI extends JFrame{
     private JPanel productsPanel;
     private JTable productsTable;
     private JScrollPane scroll;
+    private JButton companiesButton;
     private Product product;
-    //private List<Product> list;
 
     public ProductsGUI() {
         setContentPane(productsPanel);
         setTitle("Products");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(750, 440);
         setSize(500, 400);
+        companiesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CompaniesGUI();
+            }
+        });
         try(Session session = Connection.getSessionFactory().openSession()) {
             Transaction tx = session.beginTransaction();
+            //Table
             List<Product> list = session.createQuery("SELECT a FROM products a", Product.class).getResultList();
+            productsTable.setModel(new ProductsTableModel(list));
+            //Box
             List<Company> c = session.createQuery("SELECT a FROM companies a", Company.class).getResultList();
             for (Company company : c) {
                 companyBox.addItem(company.getName());
             }
-            productsTable.setModel(new ProductsTableModel(list));
         }
         catch (NoClassDefFoundError exception) {
             System.out.println("Exception!" + exception);
@@ -52,9 +61,11 @@ public class ProductsGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 CompanyDAO cd = new CompanyDAO();
                 ProductDAO pd = new ProductDAO();
-                Product product1 = new Product(nameTextField.getText(),
-                        Integer.parseInt(priceTextField.getText()), cd.fetchByName((String) companyBox.getSelectedItem()));
-                pd.add(product1);
+                if(!inputChecker()) System.out.println("invalid input");
+                else {
+                    pd.add(new Product(nameTextField.getText(), Integer.parseInt(priceTextField.getText()),
+                            cd.fetchByName((String) companyBox.getSelectedItem())));
+                }
                 tableRefresh();
             }
         });
@@ -81,7 +92,7 @@ public class ProductsGUI extends JFrame{
                     JOptionPane.showMessageDialog(new JFrame(), "Choose the row you want to change",
                             "Update Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else if(!inputChecker()) inputChecker();
+                else if(!inputChecker()) System.out.println("invalid input");
                 else {
                     pd.update((Integer) productsTable.getValueAt(productsTable.getSelectedRow(), 0),
                             nameTextField.getText(), Integer.parseInt(priceTextField.getText()),

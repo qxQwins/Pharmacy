@@ -1,6 +1,7 @@
 package DAO;
 
 import Entities.Company;
+import Entities.Product;
 import JDBC.Connection;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,6 +43,10 @@ public class CompanyDAO {
         try(Session session = Connection.getSessionFactory().openSession()) {
             Transaction tx = session.beginTransaction();
             Company company = session.get(Company.class, id);
+            List<Product> list = session.createQuery("select a from products a where company = " + id, Product.class ).getResultList();
+            for(Product product : list){
+                session.remove(product);
+            }
             session.remove(company);
             tx.commit();
             isAdded = true;
